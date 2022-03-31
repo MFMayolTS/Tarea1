@@ -6,9 +6,7 @@
 
 #define READ_ONLY "r"
 
-
 void showContentsAsStruct(FILE *pFile);
-void showContents(FILE *myFile);
 
 FILE * openingFile(char *filename){
     FILE *fp;
@@ -17,12 +15,11 @@ FILE * openingFile(char *filename){
 }
 
 
-
 int main(int argc, char *argv[] ){
 
     FILE *fp = openingFile(argv[1]);
 
-    showContents(fp);
+    showContentsAsStruct(fp);
 
 
     return 0;
@@ -32,16 +29,19 @@ int main(int argc, char *argv[] ){
 void showContentsAsStruct(FILE *pFile) {
     Libro *libros;
     //paso el contenido del file a un array de personas
-    libros = getLibro(pFile);
+    libros = getLibros(pFile);
 
-    //accedo a la cantidad de registro que lei
-    for (int i = 0; i < registryCount; ++i) {
-        //puedo solo imprimir su mail por ejemplo
-        printf("%s \n", libros[i].titulo);
+    //COmo no se cuantas personas puede haber leido, uso un pre-test
+    int actual = 0;
+    //mientras el titulo sea un string valido, esa persona existe
+    while (strlen(libros[actual].titulo) != 0){
+        //puedo solo imprimir su autor por ejemplo
+        printf("%s \n", libros[actual].autor);
+        //paso a la siguiente persona
+        actual++;
     }
 
 }
-
 
 void showContents(FILE *myFile) {
     char row[MAXCHAR];
@@ -60,5 +60,3 @@ void showContents(FILE *myFile) {
 
     }
 }
-
-
