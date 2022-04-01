@@ -8,7 +8,7 @@
 #define READ_ONLY "r"
 #define WRITE_ONLY "w"
 
-void searchBook(FILE *fp);
+void searchBook(FILE *fp, char **);
 
 
 FILE * openingFile(char *filename){
@@ -20,6 +20,7 @@ FILE * openingFile(char *filename){
 
 
 int main(int argc, char *argv[] ) {
+    char *first_row[9] = {"Titulo", "Autor", "Año", "Estante", "Sección", "Piso", "Edificio", "Sede", "\0"};
 
     FILE *fp = openingFile(argv[1]);
     if (fp == NULL) {
@@ -39,7 +40,7 @@ int main(int argc, char *argv[] ) {
 
         scanf("%d", &option);
         if (option == 4) {
-            searchBook(fp);
+            searchBook(fp, first_row);
         }
     } while ( option != 5 );
 
@@ -48,10 +49,11 @@ int main(int argc, char *argv[] ) {
 
 }
 
-void searchBook(FILE *fp) {
+void searchBook(FILE *fp, char **first_row) {
     char row[MAXCHAR];
     char *token;
     char title[LENGHT];
+    int j = 0;
 
     printf("\nIngresa el título del libro que quieres buscar:");
     fpurge(stdin);  // para limpiar el buffer de entrada stdin
@@ -77,9 +79,14 @@ void searchBook(FILE *fp) {
                 }
             }
             if (found2 == true) {
-                printf("%s\n", token);
+                while (strcmp(first_row[j], "\0") != 0) {
+                    printf("%s: %s\n", first_row[j], token);
+                    token = strtok(NULL, ",");
+                    j++;
+                }
+
             }
-            token = strtok(NULL, ",");
+
         }
     }
     if (found == false) {
@@ -88,7 +95,6 @@ void searchBook(FILE *fp) {
 }
 
 char* askStr(char* name[LENGHT]) {
-
 
     return *name;
 }
