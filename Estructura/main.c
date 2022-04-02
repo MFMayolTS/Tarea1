@@ -11,7 +11,9 @@
 
 void searchBook(FILE *fp, char **);
 void deleteRow(FILE *fp, FILE *fp2);  // va a agregar una columna con unos al final de cada fila para identificar que libros hemos borrado
-
+void addBook(FILE *fp);
+void editBook();
+//void fpurge(FILE *fp);
 
 FILE * openingFile(char *filename){
     FILE *fp;
@@ -46,8 +48,14 @@ int main(int argc, char *argv[] ) {
         printf( "   Introduzca opción (1-5): \n");
 
         scanf("%d", &option);
+        if (option == 1) {
+            addBook(fp);
+        }
         if (option == 2) {
             deleteRow(fp, fp2);
+        }
+        if (option == 3){
+            //asndjksl
         }
         if (option == 4) {
             searchBook(fp, first_row);
@@ -61,6 +69,41 @@ int main(int argc, char *argv[] ) {
     return 0;
 
 }
+void addBook(FILE *fp){
+
+    char titulo[100],autor[100],seccion[100],edificio[100],sede[100];
+    int anio,estante,piso;
+
+    printf("Escribe el titulo:\n");
+    scanf("%s",&titulo);
+
+    printf("Escribe el autor:\n");
+    scanf("%s",&autor);
+
+    printf("Escribe el año:\n");
+    scanf("%i",&anio);
+
+    printf("Escribe el estante:\n");
+    scanf("%i",&estante);
+
+    printf("Escribe la sección:\n");
+    scanf("%s",&seccion);
+
+    printf("Escribe el piso:\n");
+    scanf("%i",&piso);
+
+    printf("Escribe el edificio:\n");
+    scanf("%s",&edificio);
+
+    printf("Escribe la sede:\n");
+    scanf("%s",&sede);
+
+    fprintf(fp,"%s ,%s, %s, %i, %s, %i, %s, %s", titulo,autor,anio,estante,seccion,piso,edificio,sede);
+
+    printf("Hemos agregado el libro!!");
+    fclose(fp);
+
+}
 void deleteRow(FILE *fp, FILE *fp2) {
     char title[LENGHT];
     char *row = malloc(sizeof(char) * MAXCHAR);
@@ -69,7 +112,7 @@ void deleteRow(FILE *fp, FILE *fp2) {
     bool gate = false;
 
     printf("\nIngresa el título del libro que quieres eliminar: ");
-    fpurge(stdin);  // para limpiar el buffer de entrada stdin
+    //fpurge(stdin);  // para limpiar el buffer de entrada stdin
     fgets(title, LENGHT, stdin);
     strtok(title, "\n");
 
@@ -89,7 +132,10 @@ void deleteRow(FILE *fp, FILE *fp2) {
     else printf("Hemos encontrado y eliminado correctamente el libro!!\n");
 }
 
+void editBook(){
 
+
+}
 void searchBook(FILE *fp, char **first_row) {
     char row[MAXCHAR];
     char *token;
@@ -98,7 +144,7 @@ void searchBook(FILE *fp, char **first_row) {
     int i;
 
     printf("\nIngresa el título del libro que quieres buscar:");
-    fpurge(stdin);  // para limpiar el buffer de entrada stdin
+    //fpurge(stdin);  // para limpiar el buffer de entrada stdin
     fgets(title, LENGHT, stdin);
     strtok(title, "\n");
 
