@@ -1,0 +1,3 @@
+/Users/mf.mayol/CLionProjects/Ejercicios-CodigoC-main/Structs&Files/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/mf.mayol/CLionProjects/Ejercicios-CodigoC-main/Structs&Files/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mf.mayol/CLionProjects/Ejercicios-CodigoC-main/Structs&Files/cmake-build-debug/CMakeFiles/Structs_Files.dir
